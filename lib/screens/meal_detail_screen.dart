@@ -11,8 +11,7 @@ Widget buildSectionTitle(BuildContext context, String text) {
         text,
         style: Theme.of(context)
             .textTheme
-            .titleMedium
-            .copyWith(fontWeight: FontWeight.bold),
+            .titleLarge,
         textAlign: TextAlign.center,
       ));
 }
@@ -41,7 +40,7 @@ class MealDetailScreen extends StatelessWidget {
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
     return Scaffold(
       appBar: AppBar(
-        title: Text(mealId),
+        title: Text(selectedMeal.title),
       ),
       body: ListView(children: [
         Container(
