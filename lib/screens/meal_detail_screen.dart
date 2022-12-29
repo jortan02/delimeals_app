@@ -9,7 +9,11 @@ Widget buildSectionTitle(BuildContext context, String text) {
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.titleMedium.copyWith(fontWeight: FontWeight.bold),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            .copyWith(fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
       ));
 }
 
@@ -21,7 +25,7 @@ Widget buildContainer(Widget child) {
           borderRadius: BorderRadius.circular(10)),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
-      height: 150,
+      // height: 150,
       width: 300,
       child: child);
 }
@@ -39,7 +43,7 @@ class MealDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(mealId),
       ),
-      body: Column(children: [
+      body: ListView(children: [
         Container(
             height: 300,
             width: double.infinity,
@@ -50,6 +54,9 @@ class MealDetailScreen extends StatelessWidget {
         buildSectionTitle(context, "Ingredients"),
         buildContainer(
           ListView.builder(
+              primary: false,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Card(
                   color: Theme.of(context).colorScheme.secondary,
@@ -64,12 +71,18 @@ class MealDetailScreen extends StatelessWidget {
         buildSectionTitle(context, "Steps"),
         buildContainer(
           ListView.builder(
+              primary: false,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
                     ListTile(
                         leading: CircleAvatar(child: Text('#${index + 1}')),
-                        title: Text(selectedMeal.steps[index], style: Theme.of(context).textTheme.bodyMedium,)),
+                        title: Text(
+                          selectedMeal.steps[index],
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        )),
                     Divider(),
                   ],
                 );
