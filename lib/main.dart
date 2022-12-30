@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import './screens/filters_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/meal_detail_screen.dart';
 import './screens/category_meals_screen.dart';
@@ -24,11 +25,11 @@ class MyApp extends StatelessWidget {
               titleLarge: TextStyle(fontSize: 24, fontFamily: "RobotCondensed"),
               titleMedium:
                   TextStyle(fontSize: 24, fontFamily: "RobotCondensed"))),
-      home: TabsScreen(),
       routes: {
-        // "/": (context) => CategoriesScreen(),
+        "/": (context) => TabsScreen(),
         CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(),
         MealDetailScreen.routeName: (context) => MealDetailScreen(),
+        FiltersScreen.routeName: (context) => FiltersScreen(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);
