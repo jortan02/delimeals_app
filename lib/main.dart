@@ -11,35 +11,42 @@ import './screens/categories_screen.dart';
 
 void main() => runApp(MyApp());
 
+enum Filters {
+  Gluten,
+  Lactose,
+  Vegan,
+  Vegetarian
+}
+
 class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  Map<String, bool> _filters = {
-    'gluten': false,
-    'lactose': false,
-    'vegan': false,
-    'vegetarian': false
+  Map<Filters, bool> _filters = {
+    Filters.Gluten: false,
+    Filters.Lactose: false,
+    Filters.Vegan: false,
+    Filters.Vegetarian: false
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
 
-  void _setFilters(Map<String, bool> filterData) {
+  void _setFilters(Map<Filters, bool> filterData) {
     setState(() {
       _filters = filterData;
       _availableMeals = DUMMY_MEALS.where((meal) {
-        if (_filters["gluten"] && !meal.isGlutenFree) {
+        if (_filters[Filters.Gluten] && !meal.isGlutenFree) {
           return false;
         }
-        else if ((_filters["lactose"] && !meal.isLactoseFree)) {
+        else if ((_filters[Filters.Lactose] && !meal.isLactoseFree)) {
           return false;
         }
-        else if ((_filters["vegan"] && !meal.isVegan)) {
+        else if ((_filters[Filters.Vegan] && !meal.isVegan)) {
           return false;
         }
-        else if ((_filters["vegetarian"] && !meal.isVegetarian)) {
+        else if ((_filters[Filters.Vegetarian] && !meal.isVegetarian)) {
           return false;
         }
         return true;
