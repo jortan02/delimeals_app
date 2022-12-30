@@ -9,9 +9,7 @@ Widget buildSectionTitle(BuildContext context, String text) {
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge,
+        style: Theme.of(context).textTheme.titleLarge,
         textAlign: TextAlign.center,
       ));
 }
@@ -31,8 +29,11 @@ Widget buildContainer(Widget child) {
 
 class MealDetailScreen extends StatelessWidget {
   static const String routeName = "meal-detail";
+  final Function(String) toggleFavorite;
+  final Function(String) isFavorite;
 
-  const MealDetailScreen({Key key}) : super(key: key);
+  const MealDetailScreen({Key key, this.toggleFavorite, this.isFavorite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +92,8 @@ class MealDetailScreen extends StatelessWidget {
           ),
         ]),
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.delete), onPressed: () {
-        Navigator.of(context).pop(mealId);
-      },),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border), onPressed: () => toggleFavorite(mealId)),
     );
   }
 }
